@@ -1,8 +1,13 @@
   <div id="container">
     <div id="header">
       <div class="headerbox">
-        <img src="//hapyak_demos.s3.amazonaws.com/demos/shopyourway/Screen%20Shot%202014-12-29%20at%2012.23.48%20PM.png" width='1000'>
+        <img src="//hapyak_demos.s3.amazonaws.com/demos/shopyourway/Screen%20Shot%202014-12-30%20at%203.17.19%20PM.png">
       </div>
+      <div class="headerbox">
+        <div id="cart">
+          <img src="//hapyak_demos.s3.amazonaws.com/demos/shopyourway/Screen%20Shot%202014-12-30%20at%203.20.18%20PM.png">
+        </div>
+        </div>
     </div>
 
   </div>
@@ -31,7 +36,13 @@
             <div id="welcome">
               <!-- Welcome message will appear when user engters email address -->
             </div>
-
+            <div id="picture-container">
+              <% @products.shuffle.take(8).each do |product| %>
+                <div class="product-image">
+                  <img src="<%= product['imageUrl']%>" height='75'>
+                </div>
+              <% end %>
+            </div>
         </div>
       </div>
     </div>
@@ -40,10 +51,14 @@
 
 
 <script>
+  function updateCart(){
+    $('#cart').fadeIn('slow');
+  }
   function welcome(email_address){
     $('#welcome').text("Great! You can find your catalogs waiting under, " + email_address + ".");
+      console.log('is this working???');
+      console.log(js_products);
   }
-
   function greeting(name){
     if( !user_name ){
       $('#heading').text('Want to see what Santa has for you, ' + name + '?');
@@ -79,6 +94,9 @@ window.onYouTubeIframeAPIReady = function() {
        autoplay: false,
       onload: function(viewer) {
           viewer.addEventListener('data', function (variables) {
+              if (variables && (variables.cart_count > 0)) {
+                updateCart();
+              }
               if (variables && variables.submit_value) {
                welcome(variables.submit_value);
               }
@@ -93,9 +111,11 @@ window.onYouTubeIframeAPIReady = function() {
   </script>
 <script src="//www.youtube.com/iframe_api"></script>
 
-<% @products.each do |product| %>
-  <%= product['name'] %>
-  <img src="<%= product['imageUrl']%>" width='50'>
-  <br>
-<% end %>
+
+<div id="json-hash">
+ [ <% @products.each do |product| %>
+    '<%= product['imageUrl'] %>',
+  <% end %>]
+</div>
+
 
