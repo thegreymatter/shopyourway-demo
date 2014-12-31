@@ -21,12 +21,9 @@
     <div id="heading">
       <!-- declared via greeting function  -->
       <% if @user_profile_name %>
-        Want to see what Santa has for you, <div id="user_name"><%= @user_profile_name %>?</div>
+        Want to see what Santa has for you, <%= @user_profile_name %>?
       <% else %>
         Want to see what Santa has for you?
-        <% if request.fullpath == '/' %>
-          <a href="/?hapyak_username=Dave&hapyak_SYWID=18">View Custom Result</a>
-        <% end %>
       <% end %>
     </div>
     <div class="body-container">
@@ -35,6 +32,11 @@
         <ul>
           <li>Dynamically generate targeted video campagins</li>
           <li>Indepth analytic reports help assist your team in analyzing the effectiveness of your video strategy</li>
+          <% if request.fullpath == '/' %>
+          <li>
+            View a personalized landing page now. <a href="/custom/?hapyak_username=Dave&hapyak_SYWID=18"> Here </a>
+          </li>
+          <% end %>
         </ul>
       </div>
     </div>
@@ -71,11 +73,6 @@
 
 <script>
 
-  // $('#header').click(loadNext);
-  // function loadNext(){
-  //     console.log('loaddding');
-  //     var project_id = 12737;
-  // }
   function updateCart(){
     $('#cart').fadeIn('slow');
   }
