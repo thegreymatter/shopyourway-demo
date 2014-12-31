@@ -1,8 +1,13 @@
   <div id="container">
     <div id="header">
       <div class="headerbox">
-        <img src="//hapyak_demos.s3.amazonaws.com/demos/shopyourway/Screen%20Shot%202014-12-30%20at%203.17.19%20PM.png">
+        <img src="//hapyak_demos.s3.amazonaws.com/demos/shopyourway/Screen%20Shot%202014-12-31%20at%2011.03.11%20AM.png">
       </div>
+      <div class="headerbox">
+        <% if @user_profile_image %>
+          <img src="<%= @user_profile_image %>" width='50'>
+      <% end %>
+        </div>
       <div class="headerbox">
         <div id="cart">
           <img src="//hapyak_demos.s3.amazonaws.com/demos/shopyourway/Screen%20Shot%202014-12-30%20at%203.20.18%20PM.png">
@@ -14,7 +19,11 @@
   <div id="background">
     <div id="heading">
       <!-- declared via greeting function  -->
-      Want to see what Santa has for you?
+      <% if @user_profile_name %>
+        Want to see what Santa has for you, <%= @user_profile_name %>?
+      <% else %>
+        Want to see what Santa has for you?
+      <% end %>
     </div>
     <div class="body-container">
       <div id="menu">
@@ -28,21 +37,27 @@
     <div class="body-container">
       <div id="video-container">
         <div class="video">
-
-          <script type="text/javascript" src="//d2qrdklrsxowl2.cloudfront.net/js/hapyak.js"></script>
-            <div style="width:720px;overflow:hidden;height:405px;position:relative;">
+          <div id="hapyak-video-placeholder">
+            <script type="text/javascript" src="//d2qrdklrsxowl2.cloudfront.net/js/hapyak.js"></script>
+            <div id="hapyak-video" style="width:720px;overflow:hidden;height:405px;position:relative;">
                <div id="hapyak-player-12702-542"></div>
-            </div>
-            <div id="welcome">
-              <!-- Welcome message will appear when user engters email address -->
-            </div>
-            <div id="picture-container">
-              <% @products.shuffle.take(8).each do |product| %>
-                <div class="product-image">
-                  <img src="<%= product['imageUrl']%>" height='75'>
+               <div id="hapyak-video_2">
+                <div style="width:720px;overflow:hidden;height:405px;position:relative;">
+                   <div id="hapyak-player-12737-6353"></div>
                 </div>
-              <% end %>
+               </div>
             </div>
+          </div>
+          <div id="welcome">
+            <!-- Welcome message will appear when user engters email address -->
+          </div>
+          <div id="picture-container">
+            <% @products.shuffle.take(8).each do |product| %>
+              <div class="product-image">
+                <img src="<%= product['imageUrl']%>" height='75'>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
@@ -51,21 +66,26 @@
 
 
 <script>
+
+  $('#header').click(loadNext);
+  function loadNext(){
+      console.log('loaddding');
+      var project_id = 12737;
+  }
   function updateCart(){
     $('#cart').fadeIn('slow');
   }
   function welcome(email_address){
     $('#welcome').text("Great! You can find your catalogs waiting under, " + email_address + ".");
-      console.log('is this working???');
-      console.log(js_products);
+    $('#hapyak-video').delay(4000).fadeOut();
   }
   function greeting(name){
     if( !user_name ){
       $('#heading').text('Want to see what Santa has for you, ' + name + '?');
     }
   }
-
-
+// var project_id = 12702
+var project_id = 12737
 window.onYouTubeIframeAPIReady = function() {
    var ytPlayer = new YT.Player("hapyak-player-12702-542", {
        height: "405",
@@ -85,7 +105,7 @@ window.onYouTubeIframeAPIReady = function() {
    });
    hapyak.viewer({
        apiKey: "9ce017788cae460fa172",
-       projectId: 12702,
+       projectId: project_id,
        resetVariables: true,
        player: ytPlayer,
        playerType: "youtube",
