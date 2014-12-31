@@ -1,4 +1,3 @@
-
   <div id="container">
     <div id="header">
       <div class="headerbox">
@@ -24,9 +23,6 @@
         Want to see what Santa has for you, <div id="user_name"><%= @user_profile_name %>?</div>
       <% else %>
         Want to see what Santa has for you?
-        <% if request.fullpath == '/' %>
-          <a href="/?hapyak_username=Dave&hapyak_SYWID=18">View Custom Result</a>
-        <% end %>
       <% end %>
     </div>
     <div class="body-container">
@@ -77,10 +73,12 @@
   //     var project_id = 12737;
   // }
   function updateCart(){
+    console.log('fading innnnn');
     $('#cart').fadeIn('slow');
   }
   function welcome(email_address){
     $('#welcome').text("Great! You can find your catalogs waiting under, " + email_address + ".");
+    $('#hapyak-video').delay(4000).fadeOut();
   }
   function greeting(name){
     if( !user_name ){
