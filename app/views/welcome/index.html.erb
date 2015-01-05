@@ -1,1 +1,140 @@
-<%=@products%>
+
+  <div id="container">
+    <div id="header">
+      <div class="headerbox">
+        <img src="//hapyak_demos.s3.amazonaws.com/demos/shopyourway/Screen%20Shot%202014-12-31%20at%2011.03.11%20AM.png">
+      </div>
+      <div class="headerbox">
+        <% if @user_profile_image %>
+          <img src="<%= @user_profile_image %>" height='40'>
+      <% end %>
+        </div>
+      <div class="headerbox">
+        <div id="cart">
+          <img src="//hapyak_demos.s3.amazonaws.com/demos/shopyourway/Screen%20Shot%202014-12-30%20at%203.20.18%20PM.png">
+        </div>
+        </div>
+    </div>
+
+  </div>
+  <div id="background">
+    <div id="heading">
+      <!-- declared via greeting function  -->
+      <% if @user_profile_name %>
+        Want to see what Santa has for you, <%= @user_profile_name %>?
+      <% else %>
+        Want to see what Santa has for you?
+      <% end %>
+    </div>
+    <div class="body-container">
+      <div id="menu">
+        Enhanced by Hapyak
+        <ul>
+          <li>Dynamically generate targeted video campagins</li>
+          <li>Indepth analytic reports help assist your team in analyzing the effectiveness of your video strategy</li>
+          <% if request.fullpath == '/' %>
+          <li>
+            View a personalized landing page now. <a href="/custom/?hapyak_username=George&hapyak_SYWID=18"> Here </a>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="body-container">
+      <div id="video-container">
+        <div class="video">
+          <div id="hapyak-video-placeholder">
+            <script type="text/javascript" src="//d2qrdklrsxowl2.cloudfront.net/js/hapyak.js"></script>
+            <div id="hapyak-video" style="width:720px;overflow:hidden;height:405px;position:relative;">
+               <div id="hapyak-player-12702-542"></div>
+               <div id="hapyak-video_2">
+                <div style="width:720px;overflow:hidden;height:405px;position:relative;">
+                   <div id="hapyak-player-12737-6353"></div>
+                </div>
+               </div>
+            </div>
+          </div>
+          <div id="welcome">
+            <!-- Welcome message will appear when user enters email address -->
+          </div>
+          <div id="picture-container">
+            <% @products.shuffle.take(8).each do |product| %>
+              <div class="product-image">
+                <img src="<%= product['imageUrl']%>" height='75'>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<script>
+
+  function updateCart(){
+    $('#cart').fadeIn('slow');
+  }
+  function welcome(email_address){
+    $('#welcome').text("Great! You can find your catalogs waiting under, " + email_address + ".");
+  }
+  function greeting(name){
+    if( !user_name ){
+      $('#heading').text('Want to see what Santa has for you, ' + name + '?');
+    }
+  }
+  var project_id = 12702
+  // var project_id = 12737
+  window.onYouTubeIframeAPIReady = function() {
+     var ytPlayer = new YT.Player("hapyak-player-12702-542", {
+         height: "405",
+         width: "720",
+         videoId: "M6TvaQ26QGw",
+         playerVars: {
+             controls: /(iPhone|iPad)/i.test(navigator.userAgent) ? 0 : 2,
+             html: 1,
+             playsinline: 1,
+             autohide: 1,
+             modestbranding: 1,
+             rel: 0,
+             fs: 0,
+             showinfo: 0,
+             wmode: "opaque"
+         }
+     });
+     hapyak.viewer({
+         apiKey: "9ce017788cae460fa172",
+         projectId: project_id,
+         resetVariables: true,
+         player: ytPlayer,
+         playerType: "youtube",
+         width: 720,
+         height: 405,
+         autoplay: false,
+        onload: function(viewer) {
+            viewer.addEventListener('data', function (variables) {
+                if (variables && (variables.cart_count > 0)) {
+                  updateCart();
+                }
+                if (variables && variables.submit_value) {
+                 welcome(variables.submit_value);
+                }
+                if (variables && variables.user_name) {
+                 greeting(variables.user_name);
+                }
+            });
+      }
+     });
+  };
+
+  </script>
+<script src="//www.youtube.com/iframe_api"></script>
+
+<div id="json-hash">
+ [ <% @products.each do |product| %>
+    '<%= product['imageUrl'] %>',
+  <% end %>]
+</div>
+
+
