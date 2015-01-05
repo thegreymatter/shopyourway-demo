@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get '/custom', to: 'welcome#custom'
   get '/proxy', to: 'welcome#proxy'
 
+
+  get '/testing', to: 'welcome#testing'
+
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

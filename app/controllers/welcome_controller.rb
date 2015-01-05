@@ -55,4 +55,8 @@ class WelcomeController < ApplicationController
     @response = response
     # @products = response['products']
   end
+  def testing
+    response = HTTParty.get('https://hapyak-shopyourway.herokuapp.com/proxy')
+    @response = response
+  end
 end

@@ -1,4 +1,4 @@
-<% if request.env['PATH_INFO'] == '/proxy' %>
+<% if ((request.env['PATH_INFO'] == '/proxy') || (request.env['PATH_INFO'] == '/testing')) %>
 <%= yield %>
 <% else %>
 
