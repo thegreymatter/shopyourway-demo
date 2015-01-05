@@ -31,6 +31,7 @@ class WelcomeController < ApplicationController
 
     # Reading response from app proxy page
     response = HTTParty.get('https://hapyak-shopyourway.herokuapp.com/proxy')
+    binding.pry
     @response = response.to_json
 
     # binding.pry
