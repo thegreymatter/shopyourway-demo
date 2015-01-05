@@ -1,16 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Shopyourway</title>
+<% if request.env['PATH_INFO'] == '/proxy' %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
-</head>
-<body>
+  <%= yield %>
 
-<%= yield %>
+<% else %>
 
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>Shopyourway</title>
 
-</body>
-</html>
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+      <%= csrf_meta_tags %>
+  </head>
+  <body>
+  <%= yield %>
+  </body>
+  </html>
+
+<% end %>
+
