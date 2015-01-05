@@ -5,7 +5,6 @@ class WelcomeController < ApplicationController
     # Shopyourway Product Request
     response = HTTParty.get('https://hapyak-shopyourway.herokuapp.com/proxy')
     @products = response['products']
-    binding.pry
 
     @user_profile_name = false
     @user_profile_image = false
