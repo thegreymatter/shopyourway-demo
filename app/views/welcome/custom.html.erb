@@ -5,8 +5,10 @@
       </div>
       <div class="headerbox">
         <% if @user_profile_image %>
-          <img src="<%= @user_profile_image %>" height='40'>
-      <% end %>
+          <div id="profile-image">
+            <img src="<%= @user_profile_image %>" height='50'>
+          </div>
+        <% end %>
         </div>
       <div class="headerbox">
         <div id="cart">
@@ -20,7 +22,15 @@
     <div id="heading">
       <!-- declared via greeting function  -->
       <% if @user_profile_name %>
-        Want to see what Santa has for you, <%= @user_profile_name %>?
+        <div class="header-message">
+          Want to see what Santa has for you,
+        </div>
+        <div class="header-message">
+          <div id="user-name">&nbsp;<%= @user_profile_name %></div>
+        </div>
+        <div class="header-message">
+          ?
+        </div>
       <% else %>
         Want to see what Santa has for you?
       <% end %>
@@ -60,53 +70,55 @@
 
 <script>
 
-  // $('#header').click(loadNext);
-  // function loadNext(){
-  //     console.log('loaddding');
-  //     var project_id = 12737;
-  // }
-  function updateCart(){
-    console.log('fading innnnn');
-    $('#cart').fadeIn('slow');
-  }
-  function welcome(email_address){
-    $('#welcome').text("Great! You can find your catalogs waiting under, " + email_address + ".");
-    $('#hapyak-video').delay(4000).fadeOut();
-  }
-  function greeting(name){
-    if( !user_name ){
-      $('#heading').text('Want to see what Santa has for you, ' + name + '?');
+    function updateCart(){
+      $('#cart').fadeIn('slow');
     }
-  }
-window.onYouTubeIframeAPIReady = function() {
-   var ytPlayer = new YT.Player("hapyak-player-12737-6353", {
-       height: "405",
-       width: "720",
-       videoId: "1LQn5zb0ISs",
-       playerVars: {
-           controls: /(iPhone|iPad)/i.test(navigator.userAgent) ? 0 : 2,
-           html: 1,
-           playsinline: 1,
-           autohide: 1,
-           modestbranding: 1,
-           rel: 0,
-           fs: 0,
-           showinfo: 0,
-           wmode: "opaque"
-       }
-   });
-   hapyak.viewer({
-       apiKey: "9ce017788cae460fa172",
-       projectId: 12737,
-       css: "//hapyak_demos.s3.amazonaws.com/css/customer/shopyourway.css",
-       resetVariables: true,
-       player: ytPlayer,
-       playerType: "youtube",
-       width: 720,
-       height: 405,
-       autoplay: false
-   });
-};
+    function welcome(email_address){
+      $('#welcome').text("Great! You can find your catalogs waiting under, " + email_address + ".");
+      $('#hapyak-video').delay(4000).fadeOut();
+    }
+    function greeting(name){
+      if( !user_name ){
+        $('#heading').text('Want to see what Santa has for you, ' + name + '?');
+      }
+    }
+
+    var sears_user_name = document.getElementById('user-name').innerHTML.trim();
+    var sears_user_image = document.getElementById('profile-image').innerHTML.trim();
+
+    window.onYouTubeIframeAPIReady = function() {
+       var ytPlayer = new YT.Player("hapyak-player-12737-6353", {
+           height: "405",
+           width: "720",
+           videoId: "1LQn5zb0ISs",
+           playerVars: {
+               controls: /(iPhone|iPad)/i.test(navigator.userAgent) ? 0 : 2,
+               html: 1,
+               playsinline: 1,
+               autohide: 1,
+               modestbranding: 1,
+               rel: 0,
+               fs: 0,
+               showinfo: 0,
+               wmode: "opaque"
+           }
+       });
+       hapyak.viewer({
+           apiKey: "9ce017788cae460fa172",
+           projectId: 12737,
+           css: "//hapyak_demos.s3.amazonaws.com/css/customer/shopyourway.css",
+           resetVariables: true,
+           player: ytPlayer,
+           playerType: "youtube",
+           width: 720,
+           height: 405,
+           autoplay: false,
+            variables: {
+              searsUser: sears_user_name,
+              searsUserImage: sears_user_image
+            },
+       });
+    };
 
   </script>
 <script src="//www.youtube.com/iframe_api"></script>

@@ -113,3 +113,12 @@ h2 {
 #json-hash{
   background-color: red;
 }
+#user-name{}
+#profile-image{}
+.header-message{
+  height: 50px;
+  display: inline-block;
+  vertical-align: top;
+  float: left;
+}
+
