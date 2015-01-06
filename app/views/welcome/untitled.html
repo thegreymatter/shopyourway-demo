@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>shop your wayyy</title>
+  <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+  <style>
+    body, html {
+      background: none;
+    }
+    #container{
+      background-color: none;
+    }
+    #button-container {
+      width: 300px;
+      height: 50px;
+    }
+    .button{
+      display: inline-block;
+    }
+    .btn {
+      width: 200px;
+      text-align: center;
+      background: #3498db;
+      background: #ffb969;
+      background-image: -webkit-linear-gradient(top, #ffb969, #e6800c);
+      background-image: -moz-linear-gradient(top, #ffb969, #e6800c);
+      background-image: -ms-linear-gradient(top, #ffb969, #e6800c);
+      background-image: -o-linear-gradient(top, #ffb969, #e6800c);
+      background-image: linear-gradient(to bottom, #ffb969, #e6800c);
+      -webkit-border-radius: 0px 0px 30px 30px;
+      -moz-border-radius: 0px 0px 30px 30px;
+      border-radius: 0px 0px 30px 30px;
+      font-family: Arial;
+      color: #ffffff;
+      font-size: 20px;
+      padding: 10px 30px 10px 30px;
+      text-decoration: none;
+    }
+    .btn:hover {
+      cursor: pointer;
+      background: #3cb0fd;
+      background: #f09028;
+      background-image: -webkit-linear-gradient(top, #f09028, #cf7214);
+      background-image: -moz-linear-gradient(top, #f09028, #cf7214);
+      background-image: -ms-linear-gradient(top, #f09028, #cf7214);
+      background-image: -o-linear-gradient(top, #f09028, #cf7214);
+      background-image: linear-gradient(to bottom, #f09028, #cf7214);
+      text-decoration: none;
+    }
+
+    #box-test {
+      width: 100px;
+      height: 500px;
+      padding: 5px 20px 20px 20px;
+      margin-top: 20px;
+      margin-left: -20px;
+      background: rgba(255, 255, 255, 0.8);
+      -webkit-border-radius: 4px 4px 4px 4px;
+      -moz-border-radius: 4px 4px 4px 4px;
+      border-radius: 4px 4px 4px 4px;
+      overflow: scroll;
+    }
+    #products{
+      margin-bottom: 20px;
+    }
+    .product-wrapper{
+      height:100px;
+      width:100px;
+    }
+    .product{
+      height: 90px;
+      width: 90px;
+      background-color: #EEEEEE;
+      margin: 5px;
+      display: inline-block;
+      -webkit-box-shadow: 5px 4px 1px 5px rgba(0,0,0,0.75);
+      -moz-box-shadow: 5px 4px 1px 5px rgba(0,0,0,0.75);
+      box-shadow: 5px 4px 5px 0px rgba(0,0,0,0.75);
+    }
+    .product:hover{
+      cursor: pointer;
+    }
+      #bottom-box {
+        height: 30px;
+        width: 135px;
+        z-index:1000;
+        margin-top: -30px;
+        margin-left: -10px;
+        right:0; bottom:0; left:0;
+        position: relative;
+        background: -moz-linear-gradient(top,  rgba(255,255,255,1), rgba(255,255,255,1) 80%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(70%,rgba(255,255,255,1)));
+        background: -webkit-linear-gradient(top,  rgba(255,255,255,1),rgba(254, 150, 28,1) 80%);
+        background: -o-linear-gradient(top,  rgba(255,255,255,0) 80%,rgba(254, 150, 28,1) 80%);
+        background: -ms-linear-gradient(top,  rgba(255,255,255,1),rgba(254, 150, 28,1) 80%);
+        background: linear-gradient(to bottom,  rgba(255,255,255,1),rgba(254, 150, 28,1) 90%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
+        float: left;
+      -webkit-border-radius: 0px 0px 0px 0px;
+      -moz-border-radius: 0px 0px 0px 0px;
+      border-radius: 0px 0px 0px 0px;
+      cursor: pointer;
+      }
+      #bottom-box:hover {
+        background-color: #000000;
+      }
+      #down-arrow{
+        width: 0;
+        height: 0;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-top: 15px solid #FFF;
+        z-index:1000;
+        right:0; bottom: 3px; left:0;
+        margin: 0 auto;
+        position: absolute;
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    #add_to_cart{
+      margin-top: 10px;
+      width: 30px;
+      height: 15px;
+      top: 20px;
+      background-color: rgba(173, 189, 101, 0.8);
+      color: #FFF;
+      padding: 3px;
+      font-size: 12px;
+      display: none;
+      text-align: center;
+    }
+    .add_to_cart{
+      margin-top: 10px;
+      width: 30px;
+      height: 15px;
+      top: 20px;
+      background-color: rgba(173, 189, 101, 0.8);
+      color: #FFF;
+      padding: 3px;
+      font-size: 12px;
+      display: none;
+      text-align: center;
+    }
+    #add_to_cart:hover{
+      font-weight: strong;
+    }
+    #more_info{
+      width: 50px;
+      height: 15px;
+      background-color: rgba(173, 189, 101, 0.8);
+      color: #FFF;
+      padding: 3px;
+      font-size: 12px;
+      display: none;
+      margin-top: 10px;
+      bottom: 0px;
+      text-align: center;
+    }
+  #product-button {
+    width: 138px !important;
+    text-align: center;
+    padding: 10px 0px;
+    background: #FBFBFB;
+    color: #8E8E8E;
+    font-size: 24px;
+  }
+  #product-button:hover {
+    background: #56B3A8;
+    color: #FFF;
+    cursor: pointer;
+  }
+  #hapyak-video_2{
+    display: none;
+  }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="button-container">
+          <div id="product-button">
+            Products
+          </div>
+
+
+
+    <div id="box-test">
+        <div id="products">
+
+        </div>
+    </div>
+        <div id="bottom-box">
+          <div id="down-arrow">
+          </div>
+        </div>
+
+  </div>
+  <script type="text/javascript" src="//d2qrdklrsxowl2.cloudfront.net/js/hapyak-iframe.js"></script>
+  <script>
+
+    $('.add_to_cart').click(addToCart);
+
+    function addToCart() {
+      console.log('added to cart');
+      var cart_count = hapyak.context.env.get("cart_count")?hapyak.context.env.get("cart_count"):0;
+      hapyak.context.env.set("cart_count", parseInt(cart_count)+1, true, "track");
+      }
+
+    // var SYW_URL = 'http://sandboxplatform.shopyourway.com/products/get?ids=194623649,48634108&with=categories-path&token=0_18385_253402300799_1_07eabcc614049e8a68de05a41c88d0cffb5868c72da9ae0d0e290c7d34396a31&hash=9975bfc470398e9301fe654bcd386e035110469fbaf01e2a31f87e413b73abbb'
+    // var SYW_URL = 'https://hapyak-shopyourway.herokuapp.com/proxy'
+
+  $('#product-button').click(function(){
+    $('#box-test, #bottom-box').fadeToggle();
+  });
+
+    function setEnvironmentVariable(){
+      var cart_count = hapyak.context.env.get("custom_var")?hapyak.context.env.get("custom_var"):0;
+      hapyak.context.env.set("custom_var", parseInt(custom_var)+1, true, "track");
+    }
+
+    $('#bottom-box').click(function() {
+      var top = $('#box-test').scrollTop();
+      $('#box-test').animate({ scrollTop: '+=440'}, 1000);
+      callthis();
+      create_json();
+  });
+
+    $('#add_to_cart, #more_info').hover(function() {
+      var that = this;
+      $(that).css("background-color","rgba(173, 189, 101, 1.0)");
+    });
+
+    function dothis (){
+      var that = this;
+      $(that).children().animate({width: 'toggle'});
+    }
+    function removeThis(el){
+          var that = this;
+          console.log('hello');
+          window.setTimeout(function() {
+            $(that).text("Added!");
+            $(that).parent().parent().slideUp();
+          }, 2000);
+    };
+
+    $('.product').hover(dothis);
+    $('#add_to_cart').click(removeThis);
+
+
+
+
+
+  </script>
+
+  <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script>
+
+
+  var jqxhr = $.getJSON( "https://hapyak-shopyourway.herokuapp.com/proxy", function() {
+    console.log( "successfully recieved json" );
+  })
+    .done(function(data) {
+    console.log( "" );
+    for (var i = 0; i < data.length; i++) {
+       createImage(data[i]['imageUrl']);
+    }
+    })
+
+  // Set another completion function for the request above
+  jqxhr.complete(function() {
+    console.log( "Complete" );
+  });
+
+  function createImage(image_url){
+    console.log(image_url);
+    console.log('created image');
+    var container = $("#products");
+    container.append('<div class="product-wrapper"><div class="product"><div class="add_to_cart">Add</div><div id="more_info">View</div></div></div>');
+  }
+
+  </script>
+
+
+</body>
+</html>

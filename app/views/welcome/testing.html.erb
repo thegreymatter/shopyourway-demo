@@ -1,1 +1,20 @@
-<%= @products %>
+<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script>
+
+
+var jqxhr = $.getJSON( "https://hapyak-shopyourway.herokuapp.com/proxy", function() {
+  console.log( "successfully recieved json" );
+})
+  .done(function(data) {
+    console.log( "" );
+    for (var i = 0; i < data.length; i++) {
+       console.log(data[i]['imageUrl']);
+    }
+  })
+
+// Set another completion function for the request above
+jqxhr.complete(function() {
+  console.log( "Complete" );
+});
+
+</script>

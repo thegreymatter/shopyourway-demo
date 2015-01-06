@@ -1,15 +1,18 @@
 class WelcomeController < ApplicationController
 
+  before_filter :set_access
+  def set_access
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Request-Method"] = "*"
+    # confirmed that both of these show in the headers hash
+  end
+
   def index
 
-    # Shopyourway Product Request
-    response = HTTParty.get('http://sandboxplatform.shopyourway.com/products/search?q=toy&token=0_18385_253402300799_1_07eabcc614049e8a68de05a41c88d0cffb5868c72da9ae0d0e290c7d34396a31&hash=9975bfc470398e9301fe654bcd386e035110469fbaf01e2a31f87e413b73abbb')
-    # To change ints to strings
-    # response = response.each { |key, value| response[key] = value.to_s }
-
-    binding.pry
-
-    @products = response['products'].shuffle.take(8)
+    # Javascript request from custom proxy page
+    response = HTTParty.get('https://hapyak-shopyourway.herokuapp.com/proxy')
+    # binding.pry
+    @products = response.shuffle.take(8)
 
     @user_profile_name = false
     @user_profile_image = false
@@ -91,11 +94,3 @@ class WelcomeController < ApplicationController
     # render json: @products
   end
 end
-
-# [14] pry(#<WelcomeController>)> response['products'].each do |product|
-# [14] pry(#<WelcomeController>)*   product.each do |key, value|
-# [14] pry(#<WelcomeController>)*     if !value.is_a?(String)
-# [14] pry(#<WelcomeController>)*       puts value.to_s
-# [14] pry(#<WelcomeController>)*     end
-# [14] pry(#<WelcomeController>)*   end
-# [14] pry(#<WelcomeController>)* end
