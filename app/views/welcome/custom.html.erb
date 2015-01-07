@@ -37,11 +37,15 @@
     </div>
     <div class="body-container">
       <div id="menu">
-        Enhanced by Hapyak
-        <ul>
-          <li>Dynamically generate targeted video campagins</li>
-          <li>Indepth analytic reports help assist your team in analyzing the effectiveness of your video strategy</li>
-        </ul>
+
+          <div id="picture-container">
+            <% @products.shuffle.take(8).each do |product| %>
+              <div class="product-image">
+                <img src="<%= product['imageUrl']%>" height='75'>
+              </div>
+            <% end %>
+          </div>
+
       </div>
     </div>
     <div class="body-container">
@@ -56,12 +60,12 @@
           <div id="welcome">
             <!-- Welcome message will appear when user engters email address -->
           </div>
-          <div id="picture-container">
-            <% @products.shuffle.take(8).each do |product| %>
-              <div class="product-image">
-                <img src="<%= product['imageUrl']%>" height='75'>
-              </div>
-            <% end %>
+          <div id="about-us">
+            Enhanced by Hapyak
+            <ul>
+              <li>Dynamically generate targeted video campagins</li>
+              <li>Indepth analytic reports help assist your team in analyzing the effectiveness of your video strategy</li>
+            </ul>
           </div>
         </div>
       </div>

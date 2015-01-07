@@ -56,13 +56,6 @@
           <div id="welcome">
             <!-- Welcome message will appear when user enters email address -->
           </div>
-          <div id="picture-container">
-            <% @products.shuffle.take(8).each do |product| %>
-              <div class="product-image">
-                <img src="<%= product['imageUrl']%>" height='75'>
-              </div>
-            <% end %>
-          </div>
         </div>
       </div>
     </div>
