@@ -71,8 +71,9 @@
 
 <script>
 
-  function updateCart(){
-    $('#cart').fadeIn('slow');
+  function updateCart(count){
+      $('#cart').fadeIn('slow');
+      $('#count').fadeIn('slow').html("( " + count + " )");
   }
   function welcome(email_address){
     $('#welcome').text("Great! You can find your catalogs waiting under, " + email_address + ".");
@@ -113,7 +114,7 @@
         onload: function(viewer) {
             viewer.addEventListener('data', function (variables) {
                 if (variables && (variables.cart_count > 0)) {
-                  updateCart();
+                     updateCart(variables.cart_count);
                 }
                 if (variables && variables.submit_value) {
                  welcome(variables.submit_value);
