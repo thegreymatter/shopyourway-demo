@@ -6,7 +6,7 @@
       <div class="headerbox">
         <% if @user_profile_image %>
           <div id="profile-image">
-            <img id="profileImage" src="<%= @user_profile_image %> onerror='handleImageErrors()';" height='70'>
+            <img id="profileImage" src="<%= @user_profile_image %>" onerror='handleImageErrors()'; height='70'>
           </div>
         <% end %>
         </div>
@@ -14,9 +14,8 @@
         <div id="cart">
           <img src="//hapyak_demos.s3.amazonaws.com/demos/shopyourway/Screen%20Shot%202014-12-30%20at%203.20.18%20PM.png">
         </div>
-        </div>
+      </div>
     </div>
-
   </div>
   <div id="background">
     <div id="heading">
@@ -32,7 +31,7 @@
           ?
         </div>
       <% else %>
-        Want to see what Santa has for you?
+        <div id="user-name"></div>
       <% end %>
     </div>
     <div class="body-container">
@@ -86,15 +85,21 @@
         $('#heading').text('Want to see what Santa has for you, ' + name + '?');
       }
     }
+    function handleImageErrors(){
       $( "#profileImage" )
       .error(function() {
-        console.log('fixing image now');
         $( this ).hide();
       })
       .attr( "src", "//hapyak_demos.s3.amazonaws.com/demos/shopyourway/default_profile.gif" );
+    }
 
     var sears_user_name = document.getElementById('user-name').innerHTML.trim();
-    var sears_user_image = document.getElementById('profile-image').innerHTML.trim();
+
+    if (document.getElementById('profile-image') != null ){
+      var sears_user_image = document.getElementById('profile-image').innerHTML.trim();
+    } else {
+      var sears_user_image = "<img src='//hapyak_demos.s3.amazonaws.com/demos/shopyourway/default_profile.gif' height='70'>";
+    }
 
     window.onYouTubeIframeAPIReady = function() {
        var ytPlayer = new YT.Player("hapyak-player-12737-6353", {
