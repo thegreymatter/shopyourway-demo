@@ -5,15 +5,23 @@
       </div>
       <div class="headerbox">
         <% if @user_profile_image %>
-          <img src="<%= @user_profile_image %> onerror='this.onerror=null;this.src='test';" height='40'>
-      <% end %>
+          <div id="profile-image">
+            <img id="profileImage" src="<%= @user_profile_image %>" onerror='handleImageErrors()'; height='70'>
+          </div>
+        <% end %>
         </div>
       <div class="headerbox">
         <div id="cart">
           <img src="//hapyak_demos.s3.amazonaws.com/demos/shopyourway/Screen%20Shot%202014-12-30%20at%203.20.18%20PM.png">
         </div>
+      </div>
+      <div class="headerbox">
+        <div id="count">
+
         </div>
+      </div>
     </div>
+  </div>
 
   </div>
   <div id="background">
