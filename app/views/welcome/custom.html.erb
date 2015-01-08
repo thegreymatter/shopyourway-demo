@@ -15,6 +15,11 @@
           <img src="//hapyak_demos.s3.amazonaws.com/demos/shopyourway/Screen%20Shot%202014-12-30%20at%203.20.18%20PM.png">
         </div>
       </div>
+      <div class="headerbox">
+        <div id="count">
+
+        </div>
+      </div>
     </div>
   </div>
   <div id="background">
@@ -73,8 +78,10 @@
 
 <script>
 
-    function updateCart(){
+    function addToCart(count){
+      console.log('UPDATINGGGGG');
       $('#cart').fadeIn('slow');
+      $('#count').fadeIn('slow').html("( " + count + " )");
     }
     function welcome(email_address){
       $('#welcome').text("Great! You can find your catalogs waiting under, " + email_address + ".");
@@ -119,15 +126,23 @@
            }
        });
        hapyak.viewer({
-           apiKey: "9ce017788cae460fa172",
-           projectId: 12737,
-           css: "//hapyak_demos.s3.amazonaws.com/css/customer/shopyourway.css",
-           resetVariables: true,
-           player: ytPlayer,
-           playerType: "youtube",
-           width: 720,
-           height: 405,
-           autoplay: false,
+            apiKey: "9ce017788cae460fa172",
+            projectId: 12737,
+            css: "//hapyak_demos.s3.amazonaws.com/css/customer/shopyourway.css",
+            resetVariables: true,
+            player: ytPlayer,
+            playerType: "youtube",
+            width: 720,
+            height: 405,
+            autoplay: false,
+            onload: function(viewer) {
+                viewer.addEventListener('data', function (variables) {
+
+                    if (variables && parseInt(variables.cart_count)>0) {
+                     addToCart(variables.cart_count);
+                    }
+                });
+            },
             variables: {
               searsUser: sears_user_name,
               searsUserImage: sears_user_image
