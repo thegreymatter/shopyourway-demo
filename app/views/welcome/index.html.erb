@@ -5,7 +5,7 @@
       </div>
       <div class="headerbox">
         <% if @user_profile_image %>
-          <img src="<%= @user_profile_image %>" height='40'>
+          <img src="<%= @user_profile_image %> onerror='this.onerror=null;this.src='test';" height='40'>
       <% end %>
         </div>
       <div class="headerbox">

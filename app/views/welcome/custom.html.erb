@@ -6,7 +6,7 @@
       <div class="headerbox">
         <% if @user_profile_image %>
           <div id="profile-image">
-            <img src="<%= @user_profile_image %>" height='70'>
+            <img id="profileImage" src="<%= @user_profile_image %> onerror='handleImageErrors()';" height='70'>
           </div>
         <% end %>
         </div>
@@ -86,6 +86,12 @@
         $('#heading').text('Want to see what Santa has for you, ' + name + '?');
       }
     }
+      $( "#profileImage" )
+      .error(function() {
+        console.log('fixing image now');
+        $( this ).hide();
+      })
+      .attr( "src", "//hapyak_demos.s3.amazonaws.com/demos/shopyourway/default_profile.gif" );
 
     var sears_user_name = document.getElementById('user-name').innerHTML.trim();
     var sears_user_image = document.getElementById('profile-image').innerHTML.trim();

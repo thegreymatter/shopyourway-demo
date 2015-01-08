@@ -26,6 +26,7 @@ class WelcomeController < ApplicationController
     # Check, parse, and set variables passed through url
     requested_url = request.original_url
     parsed_url = URI.parse(requested_url)
+
     if parsed_url.query.present?
       parsed_url_hash = CGI.parse(parsed_url.query)
       syw_user_id = parsed_url_hash['hapyak_SYWID'][0]
