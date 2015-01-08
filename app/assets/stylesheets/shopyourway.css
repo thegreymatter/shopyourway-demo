@@ -85,6 +85,7 @@ h2 {
     height: 20px;
     padding: 10px;
     color: #375500;
+    float: right;
     margin-left: 100px;
   }
 .product-image{
