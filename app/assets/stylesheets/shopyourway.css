@@ -127,6 +127,7 @@ h2 {
 #about-us{
   padding-top: 60px;
   padding-left: 80px;
+  padding-bottom: 20px;
   width: 600px;
 }
 #profileImage{}
@@ -135,4 +136,13 @@ h2 {
   color: #717172;
   display: none;
 }
-
+#shopyourway_list li{
+  background: url("//hapyak_demos.s3.amazonaws.com/demos/shopyourway/bullet-a.png") no-repeat left top;
+  background-size: 18px;
+  background-position: 0px;
+  margin-left: -8px;
+  display: block;
+  height: 18px;
+  padding-left: 35px;
+  padding-top: 14px;
+}
